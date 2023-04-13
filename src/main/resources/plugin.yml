@@ -1,0 +1,12 @@
+name: HermitCore
+version: '${project.version}'
+main: net.coruptical.hermitcore.HermitCore
+api-version: 1.19
+authors: [ Coruptical ]
+description: Core plugin for managing smp server
+commands:
+  staffchat:
+    aliases:
+      - sc
+      - staffc
+    description: Allows players to enable/disable staff chat.

@@ -1,0 +1,5 @@
+# Staff chat use permission
+StaffChatPermission: 'hermitcore.staff.chat'
+
+# Message to send to players if they don't have a permission
+NoPermissionMessage: '&cYou dont have permissions to use this command.'
