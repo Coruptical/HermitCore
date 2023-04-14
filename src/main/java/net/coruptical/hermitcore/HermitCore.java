@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HermitCore extends JavaPlugin {
     public static final String STAFF_CHAT_KEY = "staff-chat-toggle";
-
+    public static final String INFORMATION_KEY = "information";
 
     private static HermitCore instance;
 
