@@ -12,7 +12,6 @@ import org.bukkit.persistence.PersistentDataType;
 public class StaffChat implements CommandExecutor {
     HermitCore plugin = HermitCore.getInstance();
     Utils ut = new Utils();
-    private final String keyName = "staff-chat-toggle";
     private final String ENABLE = "&aEnabled &fstaff chat.";
     private final String DISABLE = "&cDisabled &fstaff chat.";
 
@@ -21,7 +20,7 @@ public class StaffChat implements CommandExecutor {
        if(sender instanceof Player){
            Player p = (Player) sender;
            if(p.hasPermission(plugin.getStaffChatPermission())){
-               NamespacedKey key = new NamespacedKey(plugin, keyName);
+               NamespacedKey key = new NamespacedKey(plugin, HermitCore.STAFF_CHAT_KEY);
 
 
                if(!p.getPersistentDataContainer().has(key, PersistentDataType.INTEGER)){

@@ -13,13 +13,13 @@ import org.bukkit.persistence.PersistentDataType;
 public class ChatEvent implements Listener {
     private HermitCore plugin = HermitCore.getInstance();
     private Utils ut = new Utils();
-    private final String STAFF_CHAT_KEY = "staff-chat-toggle";
 
+    // Handles chat event for staff chat.
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
         if(p.hasPermission(plugin.getStaffChatPermission())){
-            NamespacedKey key = new NamespacedKey(plugin, STAFF_CHAT_KEY);
+            NamespacedKey key = new NamespacedKey(plugin, HermitCore.STAFF_CHAT_KEY);
             PersistentDataContainer container = p.getPersistentDataContainer();
 
             if(container.has(key, PersistentDataType.INTEGER)){

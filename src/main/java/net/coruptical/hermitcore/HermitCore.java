@@ -6,11 +6,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HermitCore extends JavaPlugin {
+    public static final String STAFF_CHAT_KEY = "staff-chat-toggle";
+
+
     private static HermitCore instance;
 
     public static HermitCore getInstance() {
         return instance;
     }
+
 
     @Override
     public void onEnable() {
