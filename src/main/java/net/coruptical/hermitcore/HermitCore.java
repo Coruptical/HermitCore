@@ -1,7 +1,9 @@
 package net.coruptical.hermitcore;
 
 import net.coruptical.hermitcore.commands.StaffChat;
+import net.coruptical.hermitcore.commands.StaffMenu;
 import net.coruptical.hermitcore.events.ChatEvent;
+import net.coruptical.hermitcore.gui.AdminMenuGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,10 +40,12 @@ public final class HermitCore extends JavaPlugin {
     public void register(){
         // Register event listeners
         getServer().getPluginManager().registerEvents(new ChatEvent(), this);
+        getServer().getPluginManager().registerEvents(new AdminMenuGUI(), this);
 
 
         // Register commands
         getCommand("staffchat").setExecutor(new StaffChat());
+        getCommand("staffmenu").setExecutor(new StaffMenu());
 
         // Register command tab completers
 
@@ -53,7 +57,12 @@ public final class HermitCore extends JavaPlugin {
     }
 
     public String getNoPermissionMessage(){
-        return ChatColor.translateAlternateColorCodes('&', getConfig().getString("NoPermissionMessage"));
+        return ChatColor.translateAlternateColorCodes('&',
+                getConfig().getString("NoPermissionMessage"));
+    }
+
+    public String getStaffMenuPermission(){
+        return getConfig().getString("StaffMenuPermission");
     }
 
 }

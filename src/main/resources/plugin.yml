@@ -10,3 +10,8 @@ commands:
       - sc
       - staffc
     description: Allows players to enable/disable staff chat.
+  staffmenu:
+    aliases:
+      - sm
+      - adminmenu
+    description: Opens the staff/admin management menu.

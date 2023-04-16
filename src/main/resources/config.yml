@@ -3,3 +3,6 @@ StaffChatPermission: 'hermitcore.staff.chat'
 
 # Message to send to players if they don't have a permission
 NoPermissionMessage: '&cYou dont have permissions to use this command.'
+
+# This permission allows players to use /staffmenu command
+StaffMenuPermission: 'hermitcore.staff.menu'

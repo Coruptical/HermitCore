@@ -1,6 +1,7 @@
 package net.coruptical.hermitcore.commands;
 
 import net.coruptical.hermitcore.HermitCore;
+import net.coruptical.hermitcore.models.ConfigPermission;
 import net.coruptical.hermitcore.utils.Utils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
@@ -19,7 +20,7 @@ public class StaffChat implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
        if(sender instanceof Player){
            Player p = (Player) sender;
-           if(p.hasPermission(plugin.getStaffChatPermission())){
+           if(p.hasPermission(ConfigPermission.STAFF_CHAT.getLabel())){
                NamespacedKey key = new NamespacedKey(plugin, HermitCore.STAFF_CHAT_KEY);
 
 

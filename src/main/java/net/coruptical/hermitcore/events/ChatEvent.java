@@ -27,14 +27,11 @@ public class ChatEvent implements Listener {
                 if(staffChatEnabled == 0)
                     return;
                 e.setCancelled(true);
-
-
                 for (Player onlinePlayer : plugin.getServer().getOnlinePlayers()){
                     if(onlinePlayer.hasPermission(plugin.getStaffChatPermission())){
                         onlinePlayer.sendMessage(ut.colored("&8[&aStaffChat&8] &b" + p.getName() + " &7⇒ &6") + e.getMessage());
                     }
                 }
-
             }
         }
     }
