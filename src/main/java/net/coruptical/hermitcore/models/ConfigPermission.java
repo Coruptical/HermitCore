@@ -7,7 +7,8 @@ import java.util.Map;
 
 public enum ConfigPermission {
     STAFF_MENU(HermitCore.getInstance().getStaffMenuPermission()),
-    STAFF_CHAT(HermitCore.getInstance().getStaffChatPermission());
+    STAFF_CHAT(HermitCore.getInstance().getStaffChatPermission()),
+    RESTORE_CHEST(HermitCore.getInstance().getRestoreChestPermission());
 
     private static final Map<String, ConfigPermission> BY_LABEL = new HashMap<>();
 

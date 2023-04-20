@@ -1,5 +1,6 @@
 package net.coruptical.hermitcore;
 
+import net.coruptical.hermitcore.commands.RestoreChest;
 import net.coruptical.hermitcore.commands.StaffChat;
 import net.coruptical.hermitcore.commands.StaffMenu;
 import net.coruptical.hermitcore.events.ChatEvent;
@@ -54,9 +55,6 @@ public final class HermitCore extends JavaPlugin {
         register();
 
 
-        getLogger().log(Level.WARNING, "Chest save interval set to " + getChestSaveIntervalInTicks() + " ticks.");
-
-
         ChestLogger chestLogger = new ChestLogger();
         chestLogger.start();
 
@@ -77,9 +75,10 @@ public final class HermitCore extends JavaPlugin {
         // Register commands
         getCommand("staffchat").setExecutor(new StaffChat());
         getCommand("staffmenu").setExecutor(new StaffMenu());
+        getCommand("restorechest").setExecutor(new RestoreChest());
 
         // Register command tab completers
-
+        getCommand("restorechest").setTabCompleter(new RestoreChest());
 
     }
 
@@ -92,6 +91,10 @@ public final class HermitCore extends JavaPlugin {
                 getConfig().getString("NoPermissionMessage"));
     }
 
+    public String getRestoreChestPermission(){
+        return getConfig().getString("ChestRestorePermission");
+    }
+
     public String getStaffMenuPermission(){
         return getConfig().getString("StaffMenuPermission");
     }
@@ -100,7 +103,6 @@ public final class HermitCore extends JavaPlugin {
         String interval = instance.getConfig().getString("ChestSaveInterval");
 
         String type = ""+interval.charAt(interval.length()-1);
-        instance.getLogger().log(Level.WARNING, "Save type= " + type);
 
 
         interval = interval.replace("s", "");

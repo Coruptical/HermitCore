@@ -15,3 +15,8 @@ commands:
       - sm
       - adminmenu
     description: Opens the staff/admin management menu.
+  restorechest:
+    description: Allows players to restore chests from older using coordinates.
+    aliases:
+      - rc
+      - chestrestore
