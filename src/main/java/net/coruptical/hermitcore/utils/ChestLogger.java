@@ -70,7 +70,7 @@ public class ChestLogger {
                                 continue;
 
 
-                            String toWrite = oUUID+";"+coords+"="+json;
+                            String toWrite = oUUID+";"+coords+";"+json;
                             writer.append(toWrite);
                         }
                         writer.close();
