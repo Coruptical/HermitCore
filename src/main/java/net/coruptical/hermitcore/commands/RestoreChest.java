@@ -2,8 +2,8 @@ package net.coruptical.hermitcore.commands;
 
 import com.google.gson.Gson;
 import net.coruptical.hermitcore.HermitCore;
-import net.coruptical.hermitcore.models.ChestFastItem;
 import net.coruptical.hermitcore.models.ConfigPermission;
+import net.coruptical.hermitcore.models.ItemModel;
 import net.coruptical.hermitcore.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -19,6 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -186,7 +187,7 @@ public class RestoreChest implements CommandExecutor, TabCompleter {
         }
 
         Gson gson = new Gson();
-        ChestFastItem[] items = gson.fromJson(json, ChestFastItem[].class);
+        ItemModel[] items = gson.fromJson(json, ItemModel[].class);
 
         if (items == null)
             return;
@@ -200,15 +201,22 @@ public class RestoreChest implements CommandExecutor, TabCompleter {
         NamespacedKey key = new NamespacedKey(plugin, HermitCore.CHEST_OWNER_KEY);
         pdc.set(key, PersistentDataType.STRING, ownerUUID);
 
+        plugin.getPlacedChests().add(chest.getLocation());
+
 
         chest.update();
 
 
         Inventory inv = chest.getBlockInventory();
-        for (ChestFastItem item : items){
-            inv.setItem(item.getIndex(), new ItemStack(
-                    Material.getMaterial(item.getType()),
-                    item.getAmount()));
+        for (ItemModel model : items){
+            ItemStack stack = null;
+            try {
+                stack = new Utils().itemFrom64(model.getStackBase64());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            inv.setItem(model.getIndex(), stack);
         }
     }
 

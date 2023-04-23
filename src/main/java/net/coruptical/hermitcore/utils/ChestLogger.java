@@ -3,6 +3,7 @@ package net.coruptical.hermitcore.utils;
 import com.google.gson.Gson;
 import net.coruptical.hermitcore.HermitCore;
 import net.coruptical.hermitcore.models.ChestFastItem;
+import net.coruptical.hermitcore.models.ItemModel;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -62,7 +63,7 @@ public class ChestLogger {
                                     location.getBlockZ();
 
                             Gson gson = new Gson();
-                            ChestFastItem[] items = gson.fromJson(json, ChestFastItem[].class);
+                            ItemModel[] items = gson.fromJson(json, ItemModel[].class);
 
                             if (items == null)
                                 continue;

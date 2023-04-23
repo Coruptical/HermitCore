@@ -2,7 +2,8 @@ package net.coruptical.hermitcore.events;
 
 import com.google.gson.Gson;
 import net.coruptical.hermitcore.HermitCore;
-import net.coruptical.hermitcore.models.ChestFastItem;
+import net.coruptical.hermitcore.models.ItemModel;
+import net.coruptical.hermitcore.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -21,8 +22,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 
 public class ChestStoreListener implements Listener {
     private final HermitCore plugin = HermitCore.getInstance();
@@ -47,7 +46,7 @@ public class ChestStoreListener implements Listener {
             PersistentDataContainer pdc = chest.getPersistentDataContainer();
 
             Gson gson = new Gson();
-            ArrayList<ChestFastItem> chestItems = new ArrayList<>();
+            ArrayList<ItemModel> chestItems = new ArrayList<>();
 
             for (short i = 0; i < inv.getSize(); i++){
                 ItemStack stack = inv.getItem(i);
@@ -55,8 +54,10 @@ public class ChestStoreListener implements Listener {
                 if (stack == null || stack.getType().isAir())
                     continue;
 
-                ChestFastItem fastItem = new ChestFastItem(stack, i);
-                chestItems.add(fastItem);
+                String b64 = new Utils().itemTo64(stack);
+
+                ItemModel model = new ItemModel(i, b64);
+                chestItems.add(model);
             }
 
             String json = gson.toJson(chestItems);
