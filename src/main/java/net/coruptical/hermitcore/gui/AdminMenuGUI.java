@@ -19,11 +19,12 @@ import java.util.Arrays;
 public class AdminMenuGUI implements Listener {
     private final Inventory inventory;
     private final int SIZE = 45;
+    private final String NAME = "&7[&bStaff Menu&7]";
+    private Utils ut = new Utils();
 
 
     public AdminMenuGUI(){
-        inventory = Bukkit.createInventory(null, SIZE,
-                new Utils().colored("&7[&bStaff Menu&7]"));
+        inventory = Bukkit.createInventory(null, SIZE, ut.colored(NAME));
 
 
         new GUIUtils().fillWithPanes(Material.BLUE_STAINED_GLASS_PANE, inventory, SIZE);
@@ -32,7 +33,10 @@ public class AdminMenuGUI implements Listener {
     }
 
     public void initItems(){
-        inventory.addItem(createItem(Material.WOODEN_AXE, "Some sword."));
+        inventory.addItem(createItem(Material.ICE, ut.colored("&7[&bFreeze All&7]"),
+                ut.colored("&fStatus: ") + ""));
+        inventory.addItem(createItem(Material.OAK_SIGN, ut.colored("&7[&bChat&7]"),
+                ut.colored("&fStatus: ") + ""));
     }
 
     protected ItemStack createItem(Material material, String name){
@@ -70,7 +74,7 @@ public class AdminMenuGUI implements Listener {
     // Cancel wrong clicks and manage them.
     @EventHandler
     public void onClick(InventoryClickEvent e){
-        if(!e.getInventory().equals(inventory))
+        if(!e.getView().getTitle().equalsIgnoreCase(ut.colored(NAME)))
             return;
 
         e.setCancelled(true);
@@ -79,7 +83,7 @@ public class AdminMenuGUI implements Listener {
     // Cancel dragging in inventory.
     @EventHandler
     public void onDrag(InventoryDragEvent e){
-        if (!e.getInventory().equals(inventory))
+        if (!e.getView().getTitle().equalsIgnoreCase(ut.colored(NAME)))
             return;
 
         e.setCancelled(true);

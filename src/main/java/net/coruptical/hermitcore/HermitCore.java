@@ -5,8 +5,10 @@ import net.coruptical.hermitcore.commands.StaffChat;
 import net.coruptical.hermitcore.commands.StaffMenu;
 import net.coruptical.hermitcore.events.ChatEvent;
 import net.coruptical.hermitcore.events.ChestStoreListener;
+import net.coruptical.hermitcore.events.RightClickHarvest;
 import net.coruptical.hermitcore.gui.AdminMenuGUI;
 import net.coruptical.hermitcore.utils.ChestLogger;
+import net.coruptical.hermitcore.utils.Settings;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,7 +48,7 @@ public final class HermitCore extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
+        Settings settings = Settings.getInstance();
 
         // Save config.yml to plugin folder.
         saveDefaultConfig();
@@ -57,6 +59,9 @@ public final class HermitCore extends JavaPlugin {
 
         ChestLogger chestLogger = new ChestLogger();
         chestLogger.start();
+
+        settings.init();
+        settings.save();
 
     }
 
