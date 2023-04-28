@@ -33,16 +33,12 @@ public class Utils {
     public String itemTo64(ItemStack stack) throws IllegalStateException {
 
         try {
-            long start = System.nanoTime();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
             dataOutput.writeObject(stack);
 
             // Serialize that array
             dataOutput.close();
-            long elapsed = System.nanoTime() - start;
-            plugin.getLogger().log(Level.INFO, "Time taken to b64 item: " +
-                    (double) elapsed/1000000 + "ms");
             return Base64Coder.encodeLines(outputStream.toByteArray());
         }
         catch (Exception e) {
@@ -52,13 +48,9 @@ public class Utils {
 
     public ItemStack itemFrom64(String data) throws IOException {
         try {
-            long start = System.nanoTime();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
             BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
             try {
-                long elapsed = System.nanoTime() - start;
-                plugin.getLogger().log(Level.INFO, "Time taken to get item from b64: " +
-                        (double) elapsed/1000000 + "ms");
                 return (ItemStack) dataInput.readObject();
             } finally {
                 dataInput.close();

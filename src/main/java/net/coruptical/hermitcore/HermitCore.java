@@ -45,10 +45,16 @@ public final class HermitCore extends JavaPlugin {
         return placedChests;
     }
 
+    private Settings settings = Settings.getInstance();
+
     @Override
     public void onEnable() {
         instance = this;
-        Settings settings = Settings.getInstance();
+
+
+        // Set up settings.yml for staff management menu.
+        settings.init();
+
 
         // Save config.yml to plugin folder.
         saveDefaultConfig();
@@ -60,14 +66,14 @@ public final class HermitCore extends JavaPlugin {
         ChestLogger chestLogger = new ChestLogger();
         chestLogger.start();
 
-        settings.init();
-        settings.save();
+
 
     }
 
     @Override
     public void onDisable() {
-
+        // Save settings.yml for staff management menu.
+        settings.saveValues();
 
     }
 
